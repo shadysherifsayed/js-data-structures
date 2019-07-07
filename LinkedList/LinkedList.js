@@ -1,9 +1,9 @@
 const Node = require('./Node');
 
 module.exports = class LinkedList {
-    
-    constructor(head = null) {
-        this.head = head;
+
+    constructor() {
+        this.head = null;
         this.length = 0;
     }
 
@@ -20,7 +20,7 @@ module.exports = class LinkedList {
         const node = new Node(data);
 
         if (this.head == null) {
-            this.prepend(data);            
+            this.prepend(data);
         } else {
             let tail = this.head;
             while (tail.next) {
@@ -40,31 +40,28 @@ module.exports = class LinkedList {
     }
 
     insert(data, index) {
-        
+
         if (this.length <= index) return this.append(data);
-        
+
         if (index <= 0) return this.prepend(data);
 
-        let prevNode = this.head;
+        let prevNode = this.get(index - 1);
+
         let nextNode = prevNode.next;
 
-        for (let i = 0; i < index; i++) {
-            if (i == index - 1) {
-                break;
-            }
-            prevNode = prevNode.next;
-            nextNode = nextNode.next;
-        }
         const node = new Node(data, nextNode);
+
         prevNode.next = node;
+
         this.length++;
+
         return node;
     }
 
 
     // O(N)
     remove(index) {
-        
+
         if (index < 0 || index >= this.length) {
             return this.outOfRange();
         }
@@ -73,19 +70,9 @@ module.exports = class LinkedList {
             const head = this.head.next;
             this.head = head;
         } else {
-            let prevNode = this.head;
-            for (let i = 1; i <= index; i++) {
-                if (i == index) {
-                    let currentNode = prevNode.next;
-                    if (currentNode) {
-                        prevNode.next = currentNode.next;
-                    } else {
-                        prevNode.next = null;
-                    }
-                    break;
-                }
-                prevNode = prevNode.next;
-            }
+            let prevNode = this.get(index - 1);
+            let deletedNode = this.get(index);
+            prevNode.next = deletedNode.next;
         }
 
         this.length--;
@@ -104,8 +91,7 @@ module.exports = class LinkedList {
             currentNode = currentNode.next;
             i++;
         }
-
-        console.log(currentNode.data);
+        return currentNode;
     }
 
     outOfRange() {
