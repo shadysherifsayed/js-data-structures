@@ -1,13 +1,11 @@
 module.exports = class Stack {
-    constructor(size) {
-        this.data = new Array(size);
+
+
+    constructor() {
+        this.data = new Array();
         this.top = -1;
-        this.size = size;
     }
 
-    isFull() {
-        return this.length() == this.size;
-    }
 
     isEmpty() {
         return this.length() == 0;
@@ -18,10 +16,6 @@ module.exports = class Stack {
     }
 
     push(data) {
-        if (this.isFull()) {
-            return console.error('STACK IS FULL');
-        }
-
         this.data[++this.top] = data;
     }
 
@@ -35,7 +29,7 @@ module.exports = class Stack {
 
     peek() {
         if (this.isEmpty()) {
-          return console.error("STACK IS EMPTY");
+            return console.error("STACK IS EMPTY");
         }
         return this.data[this.top];
     }

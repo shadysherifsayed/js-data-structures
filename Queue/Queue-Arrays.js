@@ -1,4 +1,5 @@
 module.exports = class Queue {
+
     constructor(size) {
         this.data = new Array(size);
         this.top = -1;

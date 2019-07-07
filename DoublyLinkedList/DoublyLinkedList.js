@@ -44,7 +44,7 @@ module.exports = class DoublyLinkedList {
 
     insert(data, index) {
 
-        if (index <= 0 || index >= this.length) return this.outOfRange();
+        if (index < 0 || index > this.length) return this.outOfRange();
 
         const prevNode = this.get(index - 1);
         const nextNode = prevNode.next;
@@ -58,20 +58,25 @@ module.exports = class DoublyLinkedList {
     // O(N)
     remove(index) {
 
-        if (index <= 0 || index >= this.length) return this.outOfRange();
+        if (index < 0 || index > this.length) return this.outOfRange();
 
         const deletedNode = this.get(index);
         const prevNode = deletedNode.prev;
         const nextNode = deletedNode.next;
-        prevNode.next = nextNode;
-        nextNode.prev = prevNode;
+        if (prevNode) {
+            prevNode.next = nextNode;
+        }
+        if (nextNode) {
+            nextNode.prev = prevNode;
+        }
         this.length--;
+        return deletedNode;
     }
 
     // O(N)
     get(index) {
 
-        if (index <= 0 || index >= this.length) return this.outOfRange();
+        if (index < 0 || index > this.length) return this.outOfRange();
 
         let currentNode = this.head;
         let i = 0;
@@ -98,6 +103,14 @@ module.exports = class DoublyLinkedList {
         this.tail = head;
         this.head = tail;
         return this;
+    }
+
+    pop(remove = true) {
+        return remove ? this.remove(this.length - 1) : this.get(this.length - 1);
+    }
+
+    shift(remove = true) {
+        return remove ? this.remove(0) : this.get(0);
     }
 
     outOfRange() {
