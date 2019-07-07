@@ -1,6 +1,6 @@
-const Node = require('Node');
+const Node = require('./Node');
 
-class LinkedList {
+module.exports = class LinkedList {
     
     constructor(head = null) {
         this.head = head;
@@ -112,5 +112,3 @@ class LinkedList {
         return console.error('OUT OF RANGE');
     }
 }
-
-module.exports = LinkedList;

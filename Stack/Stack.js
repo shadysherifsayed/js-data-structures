@@ -1,4 +1,4 @@
-class Stack {
+module.exports = class Stack {
     constructor(size) {
         this.data = new Array(size);
         this.top = -1;
@@ -52,15 +52,3 @@ class Stack {
 
 
 }
-
-const stack = new Stack(5);
-
-stack.push(2);
-stack.push(4);
-stack.push(20);
-stack.push(58);
-stack.push(87);
-stack.push(100);
-
-
-console.log(stack.data)
