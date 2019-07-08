@@ -1,8 +1,11 @@
-const Node = require('./Node');
+const Node = require('./DoublyNode');
+const LinkedList = require('./LinkedList');
 
-module.exports = class DoublyLinkedList {
+module.exports = class DoublyLinkedList extends LinkedList {
 
     constructor() {
+
+        super();
         this.head = null;
         this.tail = null;
         this.length = 0;
@@ -33,13 +36,6 @@ module.exports = class DoublyLinkedList {
         this.tail = node;
         this.length++;
         return node;
-    }
-
-    // O(N)
-    print(node = this.head) {
-        console.log(node.data);
-        if (!node.next) return;
-        this.print(node.next);
     }
 
     insert(data, index) {
@@ -73,21 +69,6 @@ module.exports = class DoublyLinkedList {
         return deletedNode;
     }
 
-    // O(N)
-    get(index) {
-
-        if (index < 0 || index > this.length) return this.outOfRange();
-
-        let currentNode = this.head;
-        let i = 0;
-        while (i < index) {
-            currentNode = currentNode.next;
-            i++;
-        }
-
-        return currentNode;
-    }
-
     reverse() {
         if (this.length <= 1) return;
         let node = this.head;
@@ -105,15 +86,4 @@ module.exports = class DoublyLinkedList {
         return this;
     }
 
-    pop(remove = true) {
-        return remove ? this.remove(this.length - 1) : this.get(this.length - 1);
-    }
-
-    shift(remove = true) {
-        return remove ? this.remove(0) : this.get(0);
-    }
-
-    outOfRange() {
-        return console.error('OUT OF RANGE');
-    }
 }
