@@ -1,6 +1,6 @@
 const LinkedList = require('../LinkedList/DoublyLinkedList');
 
-class Stack {
+module.exports = class Stack {
     constructor() {
         this.data = new LinkedList();
         this.first = null;

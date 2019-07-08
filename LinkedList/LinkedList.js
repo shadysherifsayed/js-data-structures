@@ -1,7 +1,4 @@
-const Node = require('./DoublyNode');
-
 module.exports = class LinkedList {
-
 
     print(node = this.head) {
         console.log(node.data);
@@ -22,7 +19,6 @@ module.exports = class LinkedList {
 
         return currentNode;
     }
-
 
     pop(remove = true) {
         return remove ? this.remove(this.length - 1) : this.get(this.length - 1);

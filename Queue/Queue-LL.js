@@ -1,6 +1,6 @@
 const LinkedList = require('../LinkedList/DoublyLinkedList');
 
-class Queue {
+cmodule.exports = class Queue {
 
     constructor() {
         this.data = new LinkedList();

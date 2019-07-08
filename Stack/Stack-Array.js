@@ -1,6 +1,5 @@
 module.exports = class Stack {
 
-
     constructor() {
         this.data = new Array();
         this.top = -1;
